@@ -1,5 +1,6 @@
 package module.managemenboss;
 
+import module.Module.ListUsers;
 import module.interfaceboss.InterfaceUser;
 import module.Module.User;
 
@@ -84,12 +85,12 @@ public class ManagementUser implements InterfaceUser {
     }
 
     @Override
-    public void edit(int number) {
+    public void edit() {
 
     }
 
     @Override
-    public void delete(String id) {
+    public void delete() {
 
     }
 

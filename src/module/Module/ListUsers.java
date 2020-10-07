@@ -1,4 +1,4 @@
-package module.managemenboss;
+package module.Module;
 import module.Module.User;
 
 import java.util.List;

@@ -65,8 +65,20 @@ public class Patient implements Serializable {
         Scanner sc = new Scanner(System.in);
         System.out.println("Nhập Mã Hồ Sơ  :");
         profileCode = sc.nextLine();
-        System.out.println("Nhập Họ Và Tên :");
-        fullName = sc.nextLine();
+        boolean check = false;
+        do {
+            System.out.println("Nhập Họ Và Tên :");
+            String regexName = "^?$";
+            String line = sc.nextLine();
+            Pattern patternName = Pattern.compile(regexName);
+            Matcher matcherName = patternName.matcher(line);
+            if (matcherName.find()) {
+                check = true;
+                fullName = line;
+            } else {
+                System.out.println("Vui Lòng Không Để Trống");
+            }
+        } while (!check);
         boolean check1 = false;
         do {
             System.out.println("Nhập Ngày Tháng Năm Sinh : " + "\n" + " dd/mm/yyyy");

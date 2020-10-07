@@ -1,7 +1,4 @@
-package module.managemenboss;
-
-import module.Module.Patient;
-
+package module.Module;
 import java.util.*;
 
 public class ListPatient {

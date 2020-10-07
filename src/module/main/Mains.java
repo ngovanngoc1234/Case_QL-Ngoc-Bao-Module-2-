@@ -1,4 +1,5 @@
 package module.main;
+
 import module.Module.User;
 import module.managemenboss.Management;
 import module.managemenboss.ManagementUser;
@@ -27,25 +28,32 @@ public class Mains implements Serializable {
                 String search;
                 if (user.getRole() == 0) {
                     System.out.println("----Logged in successfully----");
+                    int n = 0;
                     do {
                         System.out.println("----Lựa Chọn Chức Năng----");
                         System.out.println("1: Tìm Kiếm Bệnh Nhân : ");
                         System.out.println("2: Hiển Thị Thông Tin Bệnh Nhân :");
                         System.out.println("3: Exit :");
-                        switch (management.inputMenu()) {
-                            case 1:
-                                System.out.println("Nhập Thông Tin Cần Tìm :");
-                                search = sc.nextLine();
-                                management.search(search);
-                                break;
-                            case 2:
-                                System.out.println("Thông Tin Bệnh Nhân :");
-                                management.show();
-                                break;
+                        try {
+                            n = Integer.parseInt(sc.nextLine());
+                            switch (n) {
+                                case 1:
+                                    System.out.println("Nhập Thông Tin Cần Tìm :");
+                                    search = sc.nextLine();
+                                    management.search(search);
+                                    break;
+                                case 2:
+                                    System.out.println("Thông Tin Bệnh Nhân :");
+                                    management.show();
+                                    break;
+                            }
+                        } catch (Exception e){
+                            System.out.println("Chọn lại số đi ");
                         }
-                    } while (management.inputMenu() != 3);
+                    } while (n!= 3);
                 } else if (user.getRole() == 1) {
                     System.out.println("----Logged in successfully----");
+                    int n = 7;
                     do {
                         System.out.println("  Lựa Chọn Chức Năng :");
                         System.out.println("1: Thêm Bệnh Nhân : ");
@@ -54,35 +62,35 @@ public class Mains implements Serializable {
                         System.out.println("4: Xóa Tên Khỏi Hồ Sơ : ");
                         System.out.println("5: Hiển Thị Thông Tin Bệnh Nhân :");
                         System.out.println("6: Thoát :");
-                        switch (management.inputMenu()) {
-                            case 1:
-                                management.addInfos();
-                                break;
-                            case 2:
-                                System.out.println("Nhập Tên Cần Tìm ");
-                                search = sc.nextLine();
-                                management.search(search);
-                                break;
-                            case 3:
-                                System.out.println("Nhập Thông tin cần sửa ");
-                                System.out.println("Chọn Chỉnh Sửa Theo ");
-                                System.out.println("1:Nhập Tên Bệnh Nhân Cần");
-                                System.out.println("2:Nhập Tên Bệnh Nhân Cần Chỉnh CHuẩn Đoán Bệnh ");
-                                System.out.println("3:Nhập Tên Bệnh Nhân Cần Chỉnh Số Bảo Hiểm ");
-                                System.out.println("4:Nhập Tên Bệnh Nhân Cần Chỉnh Tên Khoa ");
-                                management.edit(management.inputMenu());
-                                break;
-                            case 4:
-                                System.out.println("Nhập Mã Bệnh Nhân Cần xóa :");
-                                String deleter = sc.nextLine();
-                                management.delete(deleter);
-                                break;
-                            case 5:
-                                System.out.println("Thông Tin Bệnh Nhân :");
-                                management.show();
-                                break;
+                        try {
+                            n = Integer.parseInt(sc.nextLine());
+                            switch (n) {
+                                case 1:
+                                    management.addInfos();
+                                    break;
+                                case 2:
+                                    System.out.println("Nhập Tên Cần Tìm ");
+                                    search = sc.nextLine();
+                                    management.search(search);
+                                    break;
+                                case 3:
+                                    management.edit();
+                                    break;
+                                case 4:
+                                    System.out.println("Nhập Mã Bệnh Nhân Cần xóa :");
+                                    management.delete();
+                                    break;
+                                case 5:
+                                    System.out.println("Thông Tin Bệnh Nhân :");
+                                    management.show();
+                                    break;
+                                default:
+                                    throw new Exception("Nhập lại đi ngoc");
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Nhập số");
                         }
-                    } while (management.inputMenu() != 6);
+                    } while (n != 6);
                 }
             } catch (Exception e) {
                 System.out.println("Nhập Lại Đê Bạn Ê ");

@@ -56,7 +56,7 @@ public class User {
         boolean check = false;
         do {
             System.out.println("Nhập Account ");
-            String regexName = "[a-z0-9_-]{6,12}$";
+            String regexName = "[a-z0-9]{6,12}$";
             String inputName = sc.nextLine();
             Pattern patternName = Pattern.compile(regexName);
             Matcher matcherName = patternName.matcher(inputName);

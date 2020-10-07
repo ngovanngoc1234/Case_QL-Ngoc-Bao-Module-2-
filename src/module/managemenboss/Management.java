@@ -1,8 +1,6 @@
 package module.managemenboss;
-import module.Module.Inpatient;
-import module.Module.Outpatients;
-import module.Module.Patient;
-import module.Module.TransferPatient;
+
+import module.Module.*;
 import module.interfaceboss.InterfacePatient;
 
 import java.io.*;
@@ -41,27 +39,38 @@ public class Management implements InterfacePatient {
         Outpatients outpatients = new Outpatients();
         TransferPatient transferPatient = new TransferPatient();
         Inpatient inpatient = new Inpatient();
-        System.out.println("Nhập Thông Tin Bệnh Nhân : ");
-        System.out.println("1 : Bệnh Nhân Ngoại Trú ");
-        System.out.println("2 : Bệnh Nhân Chuyển Viện ");
-        System.out.println("3 : Bệnh Nhân Nội Trú ");
-        switch (inputMenu()) {
-            case 1:
-                System.out.println("New Enter Information");
-                outpatients.addInfo();
-                mt.getPatientList().add(outpatients);
-                break;
-            case 2:
-                System.out.println("New Enter Information");
-                transferPatient.addInfo();
-                mt.getPatientList().add(transferPatient);
-                break;
-            case 3:
-                System.out.println("New Enter Information");
-                inpatient.addInfo();
-                mt.getPatientList().add(inpatient);
-                break;
-        }
+        Scanner sc = new Scanner(System.in);
+        int n = 0;
+        do {
+            System.out.println("Nhập Thông Tin Bệnh Nhân : ");
+            System.out.println("1 : Bệnh Nhân Ngoại Trú ");
+            System.out.println("2 : Bệnh Nhân Chuyển Viện ");
+            System.out.println("3 : Bệnh Nhân Nội Trú ");
+            System.out.println("4 : Exit ");
+            try {
+                n = Integer.parseInt(sc.nextLine());
+                switch (n) {
+                    case 1:
+                        System.out.println("New Enter Information");
+                        outpatients.addInfo();
+                        mt.getPatientList().add(outpatients);
+                        break;
+                    case 2:
+                        System.out.println("New Enter Information");
+                        transferPatient.addInfo();
+                        mt.getPatientList().add(transferPatient);
+                        break;
+                    case 3:
+                        System.out.println("New Enter Information");
+                        inpatient.addInfo();
+                        mt.getPatientList().add(inpatient);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Nhập số vào ");
+            }
+        } while (n != 4);
+
     }
 
     @Override
@@ -69,146 +78,217 @@ public class Management implements InterfacePatient {
         writeToFile();
         readFile();
         mt.getPatientList().sort(new SortPatientByName());
-        System.out.println("Hiện Thị Theo Thông Tin :");
-        System.out.println("1 : Bệnh Nhân Ngoại Trú ");
-        System.out.println("2 : Bệnh Nhân Chuyển Viện ");
-        System.out.println("3 : Bệnh Nhân Nội Trú ");
-        System.out.println("4 : Toàn Bộ Bệnh Nhân ");
-        switch (inputMenu()) {
-            case 1:
-                for (Patient bn : mt.getPatientList()) {
-                    if (bn instanceof Outpatients) {
-                        System.out.println(bn.toString());
-                    }
-                }
-                break;
+        Scanner sc = new Scanner(System.in);
+        int n = 0;
+        do {
+            System.out.println("Hiện Thị Theo Thông Tin :");
+            System.out.println("1 : Bệnh Nhân Ngoại Trú ");
+            System.out.println("2 : Bệnh Nhân Chuyển Viện ");
+            System.out.println("3 : Bệnh Nhân Nội Trú ");
+            System.out.println("4 : Toàn Bộ Bệnh Nhân ");
+            System.out.println("5 : Exit ");
+            try {
+                n = Integer.parseInt(sc.nextLine());
+                switch (n) {
+                    case 1:
+                        for (Patient bn : mt.getPatientList()) {
+                            if (bn instanceof Outpatients) {
+                                System.out.println(bn.toString());
+                            }
+                        }
+                        break;
 
-            case 2:
-                for (Patient bn : mt.getPatientList()) {
-                    if (bn instanceof TransferPatient) {
-                        System.out.println(bn.toString());
-                    }
-                }
-                break;
+                    case 2:
+                        for (Patient bn : mt.getPatientList()) {
+                            if (bn instanceof TransferPatient) {
+                                System.out.println(bn.toString());
+                            }
+                        }
+                        break;
 
-            case 3:
-                for (Patient bn : mt.getPatientList()) {
-                    if (bn instanceof Inpatient) {
-                        System.out.println(bn.toString());
-                    }
-                }
-                break;
+                    case 3:
+                        for (Patient bn : mt.getPatientList()) {
+                            if (bn instanceof Inpatient) {
+                                System.out.println(bn.toString());
+                            }
+                        }
+                        break;
 
-            case 4:
-                for (Patient bn : mt.getPatientList()) {
-                    System.out.println(bn.toString());
+                    case 4:
+                        for (Patient bn : mt.getPatientList()) {
+                            System.out.println(bn.toString());
+                        }
+                        break;
                 }
-                break;
-        }
+            } catch (Exception e) {
+                System.out.println("Nhập số vào ");
+            }
+        } while (n != 5);
+
     }
 
     @Override
     public void search(String regex) {
-        int index = 0;
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher;
-        for (int i = 0; i < mt.getPatientList().size(); i++) {
-            matcher = pattern.matcher(mt.getPatientList().get(i).getFullName());
-            if (matcher.find()) {
-                System.out.println("STT " + i + " : " + mt.getPatientList().get(i).toString());
-                index++;
-            }
-        }
-        if (index <= 0) {
-            System.out.println("This name is not on the list ");
-        }
-    }
-
-    @Override
-    public void edit(int number) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Tên Cần Chỉnh :");
-        String edit;
-        switch (number) {
-            case 1:
-                edit = sc.nextLine();
-                for (Patient name : mt.getPatientList()) {
-                    if (edit.equals(name.getFullName())) {
-                        System.out.println("Chỉnh tên : ");
-                        String add = sc.nextLine();
-                        name.setFullName(add);
-                        System.out.println("Name after editing " + name.getFullName());
-                    }
+        int n = 0;
+        do {
+            System.out.println("1 : search");
+            System.out.println("2 : exit ");
+            try {
+                n = Integer.parseInt(sc.nextLine());
+                switch (n) {
+                    case 1:
+                        int index = 0;
+                        Pattern pattern = Pattern.compile(regex);
+                        Matcher matcher;
+                        for (int i = 0; i < mt.getPatientList().size(); i++) {
+                            matcher = pattern.matcher(mt.getPatientList().get(i).getFullName());
+                            if (matcher.find()) {
+                                System.out.println("STT " + i + " : " + mt.getPatientList().get(i).toString());
+                                index++;
+                            }
+                        }
+                        if (index <= 0) {
+                            System.out.println("This name is not on the list ");
+                        }
+                        break;
                 }
-                break;
+            } catch (Exception e) {
+                System.out.println("Nhâp vào đê ");
+            }
+        } while (n != 2);
 
-            case 2:
-                edit = sc.nextLine();
-                for (Patient Diagnosis : mt.getPatientList()) {
-                    if (edit.equals(Diagnosis.getFullName())) {
-                        System.out.println("Chuẩn Đoán Lại : ");
-                        String add = sc.nextLine();
-                        Diagnosis.setDiagnosis(add);
-                        System.out.println("Name after editing " + Diagnosis.getDiagnosis());
-                    }
-                }
-                break;
-
-            case 3:
-                edit = sc.nextLine();
-                for (Patient insuranceBook : mt.getPatientList()) {
-                    Outpatients bnt = (Outpatients) insuranceBook;
-                    if (edit.equals(bnt.getFullName())) {
-                        System.out.println("Chỉnh Số Sổ Bảo Hiểm : ");
-                        String add = sc.nextLine();
-                        bnt.setInsuranceBook(add);
-                        System.out.println("Sau khi chỉnh : " + bnt.getInsuranceBook());
-                    }
-                }
-                break;
-
-            case 4:
-                edit = sc.nextLine();
-                for (Patient facultyName : mt.getPatientList()) {
-                    Inpatient bnt = (Inpatient) facultyName;
-                    if (edit.equals(bnt.getFullName())) {
-                        System.out.println("Chỉnh Tên Khoa : ");
-                        String add = sc.nextLine();
-                        bnt.setFacultyName(add);
-                        System.out.println("Sau khi chỉnh : " + bnt.getFacultyName());
-                    }
-                }
-                break;
-        }
     }
 
     @Override
-    public void delete(String id) {
-        Patient patient = null;
-        int size = mt.getPatientList().size();
-        for (int i = 0; i < size; i++) {
-            if (mt.getPatientList().get(i).getProfileCode().equals(id)) {
-                patient = mt.getPatientList().get(i);
-                break;
+    public void edit() {
+        Scanner sc = new Scanner(System.in);
+        int num = 0;
+        do {
+            System.out.println("Nhập Thông tin cần sửa ");
+            System.out.println("Chọn Chỉnh Sửa Theo ");
+            System.out.println("1:Nhập Tên Bệnh Nhân Cần");
+            System.out.println("2:Nhập Tên Bệnh Nhân Cần Chỉnh CHuẩn Đoán Bệnh ");
+            System.out.println("3:Nhập Tên Bệnh Nhân Cần Chỉnh Số Bảo Hiểm ");
+            System.out.println("4:Nhập Tên Bệnh Nhân Cần Chỉnh Tên Khoa ");
+            System.out.println("5:exit ");
+            try {
+                num = Integer.parseInt(sc.nextLine());
+                String edit;
+                int n = 0;
+                switch (num) {
+                    case 1:
+                        System.out.println("Tên Cần Chỉnh :");
+                        edit = sc.nextLine();
+                        for (Patient name : mt.getPatientList()) {
+                            if (edit.equals(name.getFullName())) {
+                                System.out.println("Chỉnh tên : ");
+                                String add = sc.nextLine();
+                                name.setFullName(add);
+                                System.out.println("Name after editing " + name.getFullName());
+                                n++;
+                                break;
+                            }
+                        }
+                        if (n == 0) {
+                            System.out.println("tên không co trong danh sách");
+                            break;
+                        }
+                        break;
+
+                    case 2:
+                        System.out.println("Tên Cần Chỉnh :");
+                        edit = sc.nextLine();
+                        for (Patient Diagnosis : mt.getPatientList()) {
+                            if (edit.equals(Diagnosis.getFullName())) {
+                                System.out.println("Chuẩn Đoán Lại : ");
+                                String add = sc.nextLine();
+                                Diagnosis.setDiagnosis(add);
+                                System.out.println("Name after editing " + Diagnosis.getDiagnosis());
+                                n++;
+                                break;
+                            }
+                        }
+                        if (n == 0) {
+                            System.out.println("tên không co trong danh sách");
+                        }
+                        break;
+
+                    case 3:
+                        System.out.println("Tên Cần Chỉnh :");
+                        edit = sc.nextLine();
+                        for (Patient insuranceBook : mt.getPatientList()) {
+                            Outpatients bnt = (Outpatients) insuranceBook;
+                            if (edit.equals(bnt.getFullName())) {
+                                System.out.println("Chỉnh Số Sổ Bảo Hiểm : ");
+                                String add = sc.nextLine();
+                                bnt.setInsuranceBook(add);
+                                System.out.println("Sau khi chỉnh : " + bnt.getInsuranceBook());
+                                n++;
+                                break;
+                            }
+                        }
+                        if (n == 0) {
+                            System.out.println("tên không co trong danh sách");
+                        }
+                        break;
+
+                    case 4:
+                        System.out.println("Tên Cần Chỉnh :");
+                        edit = sc.nextLine();
+                        for (Patient facultyName : mt.getPatientList()) {
+                            Inpatient bnt = (Inpatient) facultyName;
+                            if (edit.equals(bnt.getFullName())) {
+                                System.out.println("Chỉnh Tên Khoa : ");
+                                String add = sc.nextLine();
+                                bnt.setFacultyName(add);
+                                System.out.println("Sau khi chỉnh : " + bnt.getFacultyName());
+                                n++;
+                                break;
+                            }
+                        }
+                        if (n == 0) {
+                            System.out.println("tên không co trong danh sách");
+                        }
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Nhập lại đê ");
             }
-        }
-        if (patient != null) {
-            System.out.println("Bệnh Nhân Đã Xóa Tên Là : \n" + patient.getFullName());
-            mt.getPatientList().remove(patient);
-        } else {
-            System.out.printf("id = %d not existed.\n", id);
-        }
+        } while (num != 5);
     }
 
-    public int inputMenu() {
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
+    @Override
+    public void delete() {
+        Scanner sc = new Scanner(System.in);
+        int n = 0;
+        do {
+            System.out.println("1: Delete");
+            System.out.println("2: exit");
             try {
-                int id = Integer.parseInt(scanner.nextLine());
-                return id;
-            } catch (NumberFormatException | NullPointerException ex) {
-                System.out.print("Chọn Chức Năng Đê Bạn Ê ");
+                n = Integer.parseInt(sc.nextLine());
+                switch (n) {
+                    case 1:
+                    System.out.println("Nhập mã bệnh nhân ");
+                    String id = sc.nextLine();
+                    Patient patient = null;
+                    int size = mt.getPatientList().size();
+                    for (int i = 0; i < size; i++) {
+                        if (mt.getPatientList().get(i).getProfileCode().equals(id)) {
+                            patient = mt.getPatientList().get(i);
+                            break;
+                        }
+                    }
+                    if (patient != null) {
+                        System.out.println("Bệnh Nhân Đã Xóa Tên Là : \n" + patient.getFullName());
+                        mt.getPatientList().remove(patient);
+                    }
+                    break;
+                }
+            } catch (Exception e) {
+                System.out.println("Nhập sai rồi");
             }
-        }
+        } while (n != 2);
     }
+
 }
