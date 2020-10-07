@@ -55,16 +55,16 @@ public class Patient implements Serializable {
 
     @Override
     public String toString() {
-        return  " Mã hồ sơ : "+profileCode + '\'' +
+        return " Mã hồ sơ : " + profileCode + '\'' +
                 ", Họ Tên : " + fullName + '\'' +
-                ", Ngày Tháng Năm Sinh : " +  dateOfBirth+ '\'' +
+                ", Ngày Tháng Năm Sinh : " + dateOfBirth + '\'' +
                 ", Chuẩn Đoán : " + diagnosis + '\'';
     }
 
     public void addInfo() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Nhập Mã Hồ Sơ  :");
-        profileCode = sc.nextLine();
+        setProfileCode(sc.nextLine());
         boolean check = false;
         do {
             System.out.println("Nhập Họ Và Tên :");
@@ -74,7 +74,7 @@ public class Patient implements Serializable {
             Matcher matcherName = patternName.matcher(line);
             if (matcherName.find()) {
                 check = true;
-                fullName = line;
+                setFullName(line);
             } else {
                 System.out.println("Vui Lòng Không Để Trống");
             }
@@ -88,13 +88,13 @@ public class Patient implements Serializable {
             Matcher matcherBirth = patternBirth.matcher(line);
             if (matcherBirth.find()) {
                 check1 = true;
-                dateOfBirth = line;
+                setDateOfBirth(line);
             } else {
                 System.out.println("Vui Lòng NHập Đúng Định Dạng");
             }
         } while (!check1);
 
         System.out.println("Chuẩn Đoán Bệnh : ");
-        diagnosis = sc.nextLine();
+        setDiagnosis(sc.nextLine());
     }
 }

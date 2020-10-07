@@ -46,8 +46,8 @@ public class Outpatients extends Patient {
         super.addInfo();
         Scanner sc = new Scanner(System.in);
         System.out.println("Nhập Số Thẻ Bảo Hiểm : ");
-        insuranceBook = sc.nextLine();
+        setInsuranceBook(sc.nextLine()) ;
         System.out.println("Mã Đơn Thuốc : ");
-        prescriptionCode = sc.nextLine();
+        setPrescriptionCode(sc.nextLine());
     }
 }

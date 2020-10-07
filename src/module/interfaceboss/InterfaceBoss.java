@@ -7,6 +7,5 @@ public interface InterfaceBoss {
     void search(String regex);
     void edit();
     void delete();
-    void writeToFile() throws IOException;
 
 }

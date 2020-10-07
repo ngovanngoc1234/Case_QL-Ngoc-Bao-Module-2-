@@ -76,7 +76,7 @@ public class Inpatient extends Patient {
             Matcher matcherHospitalizedDay = patternHospitalizedDay.matcher(nextLine);
             if (matcherHospitalizedDay.find()) {
                 check3 = true;
-                hospitalizedDay = nextLine;
+                setHospitalizedDay(nextLine);
             } else {
                 System.out.println("Vui Lòng NHập Đúng Định Dạng");
             }
@@ -90,14 +90,14 @@ public class Inpatient extends Patient {
             Matcher matcherOfDischarge = patternOfDischarge.matcher(inputsOfDischarge);
             if (matcherOfDischarge.find()) {
                 check2 = true;
-                dayOfDischarge = inputsOfDischarge;
+                setDayOfDischarge(inputsOfDischarge) ;
             } else {
                 System.out.println("Vui Lòng NHập Đúng Định Dạng");
             }
         } while (!check2);
         System.out.println("Tên Khoa : ");
-        facultyName = sc.nextLine();
+        setFacultyName(sc.nextLine());
         System.out.println("Số Gường Nằm : ");
-        numberOfBeds = sc.nextInt();
+        setNumberOfBeds(sc.nextInt());
     }
 }

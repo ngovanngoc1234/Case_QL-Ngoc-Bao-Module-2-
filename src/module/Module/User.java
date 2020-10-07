@@ -68,9 +68,10 @@ public class User {
             }
         } while (!check);
         boolean check1 = false;
+//        ((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!]).{6,20})
         do {
             System.out.println("Nhập password");
-            String regexPassword = "((?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!]).{6,20})";
+            String regexPassword = "[a-z0-9]{6,12}$";
             String inputPassword = sc.nextLine();
             Pattern patternPassword = Pattern.compile(regexPassword);
             Matcher matcherPassword = patternPassword.matcher(inputPassword);

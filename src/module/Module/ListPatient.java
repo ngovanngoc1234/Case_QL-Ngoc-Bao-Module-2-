@@ -12,7 +12,6 @@ public class ListPatient {
     public ListPatient(List<Patient> patients) {
         patientList = patients;
     }
-    public ListPatient() {
-    }
+    public ListPatient() {}
 
 }

@@ -1,14 +1,14 @@
 package module.managemenboss;
-
 import module.Module.*;
 import module.interfaceboss.InterfacePatient;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+
 
 public class Management implements InterfacePatient {
     List<Patient> patients = new ArrayList<>();
@@ -70,7 +70,6 @@ public class Management implements InterfacePatient {
                 System.out.println("Nhập số vào ");
             }
         } while (n != 4);
-
     }
 
     @Override
@@ -124,7 +123,6 @@ public class Management implements InterfacePatient {
                 System.out.println("Nhập số vào ");
             }
         } while (n != 5);
-
     }
 
     @Override
@@ -157,7 +155,6 @@ public class Management implements InterfacePatient {
                 System.out.println("Nhâp vào đê ");
             }
         } while (n != 2);
-
     }
 
     @Override

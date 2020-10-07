@@ -8,25 +8,19 @@ public class TransferPatient extends Patient {
     private String deliveryDate;
     private String placeOfTransfer;
 
-    public TransferPatient() {
-    }
-
+    public TransferPatient() {}
     public TransferPatient(String profileCode, String fullName, String dateOfBirth, String diagnosis) {
         super(profileCode, fullName, dateOfBirth, diagnosis);
     }
-
     public String getDeliveryDate() {
         return deliveryDate;
     }
-
     public void setDeliveryDate(String deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
-
     public String getPlaceOfTransfer() {
         return placeOfTransfer;
     }
-
     public void setPlaceOfTransfer(String placeOfTransfer) {
         this.placeOfTransfer = placeOfTransfer;
     }
@@ -56,13 +50,13 @@ public class TransferPatient extends Patient {
             Matcher matcherDateOfBirth = patternDateOfBirth.matcher(inputDeliveryDate);
             if (matcherDateOfBirth.find()) {
                 check4 = true;
-                deliveryDate = inputDeliveryDate;
+                setDeliveryDate(inputDeliveryDate) ;
             } else {
                 System.out.println("Vui Lòng NHập Đúng Định Dạng");
             }
         }while (!check4);
 
         System.out.println("Nơi Chuyển Đến : ");
-        placeOfTransfer = sc.nextLine();
+        setPlaceOfTransfer(sc.nextLine());
     }
 }
