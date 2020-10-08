@@ -43,8 +43,7 @@ public class Patient implements Serializable {
         this.diagnosis = diagnosis;
     }
 
-    public Patient() {
-    }
+    public Patient() {}
 
     public Patient(String profileCode, String fullName, String dateOfBirth, String diagnosis) {
         this.profileCode = profileCode;
@@ -63,8 +62,22 @@ public class Patient implements Serializable {
 
     public void addInfo() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nhập Mã Hồ Sơ  :");
-        setProfileCode(sc.nextLine());
+
+        boolean check2 = false;
+        do {
+            System.out.println("Nhập Mã Hồ Sơ  :");
+            String regexName = "^?$";
+            String line = sc.nextLine();
+            Pattern pattern = Pattern.compile(regexName);
+            Matcher matcher = pattern.matcher(line);
+            if (matcher.find()) {
+                check2 = true;
+                setProfileCode(sc.nextLine());
+            } else {
+                System.out.println("Vui Lòng Không Để Trống");
+            }
+        } while (!check2);
+
         boolean check = false;
         do {
             System.out.println("Nhập Họ Và Tên :");
@@ -79,6 +92,7 @@ public class Patient implements Serializable {
                 System.out.println("Vui Lòng Không Để Trống");
             }
         } while (!check);
+
         boolean check1 = false;
         do {
             System.out.println("Nhập Ngày Tháng Năm Sinh : " + "\n" + " dd/mm/yyyy");
@@ -94,7 +108,20 @@ public class Patient implements Serializable {
             }
         } while (!check1);
 
-        System.out.println("Chuẩn Đoán Bệnh : ");
-        setDiagnosis(sc.nextLine());
+        boolean check3 = false;
+        do {
+            System.out.println("Chuẩn Đoán Bệnh : ");
+            String regex = "^?$";
+            String line = sc.nextLine();
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(line);
+            if (matcher.find()) {
+                check3 = true;
+                setDiagnosis(sc.nextLine());
+            } else {
+                System.out.println("Vui Lòng Không Để Trống");
+            }
+        } while (!check3);
+
     }
 }

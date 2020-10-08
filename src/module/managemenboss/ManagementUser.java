@@ -14,6 +14,7 @@ public class ManagementUser implements InterfaceUser {
     ListUsers methodUsers = new ListUsers(users);
     Scanner sc = new Scanner(System.in);
 
+
     @Override
     public List<User> readFile() throws IOException, ClassNotFoundException {
         FileInputStream fileInputStream = new FileInputStream("listuser.dat");
@@ -43,31 +44,28 @@ public class ManagementUser implements InterfaceUser {
         methodUsers.getUserList().add(users);
         int n = 0;
         do {
-            System.out.println("1: Please log in");
-            System.out.println("2: exit ");
+            System.out.println("1: Xin vui lòng đăng nhập");
+            System.out.println("2: Thoát ");
             try {
                 n = Integer.parseInt(sc.nextLine());
-                switch (n) {
-                    case 1:
-                        System.out.println("User name");
-                        String ad = sc.nextLine();
-                        System.out.println("Password");
-                        String adMk = sc.nextLine();
-                        int index = 0;
-                        for (User user5 : methodUsers.getUserList()) {
-                            if (ad.equals(user5.getYouName()) && adMk.equals(user5.getPassword())) {
-                                user = user5;
-                                index++;
-                                System.out.println("Đăng Nhập Thành Công");
-                                break;
-                            }
-                        }
-                        if (index <= 0) {
-                            System.out.println("Sai tài khoản hoặc mật khẩu");
-                            user = null;
+                if (n == 1) {
+                    System.out.println("Tên tài khoản");
+                    String name = sc.nextLine();
+                    System.out.println(" Mật khẩu");
+                    String passWord = sc.nextLine();
+                    int index = 0;
+                    for (User user5 : methodUsers.getUserList()) {
+                        if (name.equals(user5.getYouName()) && passWord.equals(user5.getPassword())) {
+                            user = user5;
+                            index++;
+                            System.out.println("Đăng Nhập Thành Công");
                             break;
                         }
-                        break;
+                    }
+                    if (index <= 0) {
+                        System.out.println("Sai tài khoản hoặc mật khẩu");
+                        user = null;
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("Nhập vào đê ");
@@ -76,40 +74,40 @@ public class ManagementUser implements InterfaceUser {
         return user;
     }
 
+
     @Override
     public void addInfos() throws IOException, ClassNotFoundException {
+        //doc file gan vao bien list user
+
         int number = 0;
         do {
-            System.out.println("1: Add New Account");
-            System.out.println("2: exit ");
+            System.out.println("1: Thêm tài khoản mới");
+            System.out.println("2: Thoát ");
             try {
                 number = Integer.parseInt(sc.nextLine());
-                switch (number) {
-                    case 1:
-                        methodUsers.setUserList(readFile());
-                        User users1 = new User();
-                        System.out.println("Mời Nhập Thông Tin ");
-                        users1.createAccount();
-                        int index = 0;
-                        for (User value : methodUsers.getUserList()) {
-                            if (users1.getYouName().equals(value.getYouName())) {
-                                index++;
-                            }
+                if (number == 1) {
+                    User user = new User();
+                    System.out.println("Mời Nhập Thông Tin ");
+                    user.createAccount();
+                    int index = 0;
+                    for (User value : methodUsers.getUserList()) {
+                        if (user.getYouName().equals(value.getYouName())) {
+                            index++;
                         }
-                        if (index == 0) {
-                            methodUsers.getUserList().add(users1);
-                            break;
-                        } else {
-                            System.out.println("Account already exists");
-                        }
-                        break;
+                    }
+                    if (index == 0) {
+                        methodUsers.getUserList().add(user);
+                    } else {
+                        System.out.println("Tài khoản đã tồn tại");
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("Nhập vào đi");
             }
         } while (number != 2);
-    }
+        //ghi vao file
 
+    }
 
 
     @Override
@@ -118,7 +116,7 @@ public class ManagementUser implements InterfaceUser {
     }
 
     @Override
-    public void search(String regex) {
+    public void search() {
 
     }
 

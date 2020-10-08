@@ -1,6 +1,8 @@
 package module.Module;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Outpatients extends Patient {
     private String insuranceBook;
@@ -45,9 +47,36 @@ public class Outpatients extends Patient {
     public void addInfo() {
         super.addInfo();
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nhập Số Thẻ Bảo Hiểm : ");
-        setInsuranceBook(sc.nextLine()) ;
-        System.out.println("Mã Đơn Thuốc : ");
-        setPrescriptionCode(sc.nextLine());
+        boolean check = false;
+        do {
+            System.out.println("Nhập Số Thẻ Bảo Hiểm : ");
+            System.out.println("  BH....");
+            String regex = "^BH+\\d+]$";
+            String nextLine = sc.nextLine();
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(nextLine);
+            if (matcher.find()) {
+                check = true;
+                setInsuranceBook(sc.nextLine()) ;
+            } else {
+                System.out.println("Vui Lòng Nhập vào");
+            }
+        } while (!check);
+
+        boolean check1 = false;
+        do {
+            System.out.println("Mã Đơn Thuốc : ");
+            System.out.println("  BV....");
+            String regex = "^BV+\\d+]$";
+            String nextLine = sc.nextLine();
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(nextLine);
+            if (matcher.find()) {
+                check1 = true;
+                setPrescriptionCode(sc.nextLine());
+            } else {
+                System.out.println("Vui Lòng Nhập vào");
+            }
+        } while (!check1);
     }
 }

@@ -46,22 +46,22 @@ public class Management implements InterfacePatient {
             System.out.println("1 : Bệnh Nhân Ngoại Trú ");
             System.out.println("2 : Bệnh Nhân Chuyển Viện ");
             System.out.println("3 : Bệnh Nhân Nội Trú ");
-            System.out.println("4 : Exit ");
+            System.out.println("4 : Thoát ");
             try {
                 n = Integer.parseInt(sc.nextLine());
                 switch (n) {
                     case 1:
-                        System.out.println("New Enter Information");
+                        System.out.println("Nhập thông tin mới");
                         outpatients.addInfo();
                         mt.getPatientList().add(outpatients);
                         break;
                     case 2:
-                        System.out.println("New Enter Information");
+                        System.out.println("Nhập thông tin mới");
                         transferPatient.addInfo();
                         mt.getPatientList().add(transferPatient);
                         break;
                     case 3:
-                        System.out.println("New Enter Information");
+                        System.out.println("Nhập thông tin mới");
                         inpatient.addInfo();
                         mt.getPatientList().add(inpatient);
                         break;
@@ -80,12 +80,12 @@ public class Management implements InterfacePatient {
         Scanner sc = new Scanner(System.in);
         int n = 0;
         do {
-            System.out.println("Hiện Thị Theo Thông Tin :");
+            System.out.println(" Hiện Thị Theo Thông Tin :");
             System.out.println("1 : Bệnh Nhân Ngoại Trú ");
             System.out.println("2 : Bệnh Nhân Chuyển Viện ");
             System.out.println("3 : Bệnh Nhân Nội Trú ");
             System.out.println("4 : Toàn Bộ Bệnh Nhân ");
-            System.out.println("5 : Exit ");
+            System.out.println("5 : Thoát ");
             try {
                 n = Integer.parseInt(sc.nextLine());
                 switch (n) {
@@ -126,30 +126,31 @@ public class Management implements InterfacePatient {
     }
 
     @Override
-    public void search(String regex) {
+    public void search() {
         Scanner sc = new Scanner(System.in);
         int n = 0;
         do {
-            System.out.println("1 : search");
-            System.out.println("2 : exit ");
+            System.out.println("Chọn Chức Năng");
+            System.out.println("1 : Tìm");
+            System.out.println("2 : Thoát ");
             try {
                 n = Integer.parseInt(sc.nextLine());
-                switch (n) {
-                    case 1:
-                        int index = 0;
-                        Pattern pattern = Pattern.compile(regex);
-                        Matcher matcher;
-                        for (int i = 0; i < mt.getPatientList().size(); i++) {
-                            matcher = pattern.matcher(mt.getPatientList().get(i).getFullName());
-                            if (matcher.find()) {
-                                System.out.println("STT " + i + " : " + mt.getPatientList().get(i).toString());
-                                index++;
-                            }
+                if (n == 1) {
+                    System.out.println("Nhập Thông Tin Cần Tìm :");
+                    String regex = sc.nextLine();
+                    int index = 0;
+                    Pattern pattern = Pattern.compile(regex);
+                    Matcher matcher;
+                    for (int i = 0; i < mt.getPatientList().size(); i++) {
+                        matcher = pattern.matcher(mt.getPatientList().get(i).getFullName());
+                        if (matcher.find()) {
+                            System.out.println("STT " + i + " : " + mt.getPatientList().get(i).toString());
+                            index++;
                         }
-                        if (index <= 0) {
-                            System.out.println("This name is not on the list ");
-                        }
-                        break;
+                    }
+                    if (index <= 0) {
+                        System.out.println("Tên này không có trong danh sách\n ");
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("Nhâp vào đê ");
@@ -164,11 +165,11 @@ public class Management implements InterfacePatient {
         do {
             System.out.println("Nhập Thông tin cần sửa ");
             System.out.println("Chọn Chỉnh Sửa Theo ");
-            System.out.println("1:Nhập Tên Bệnh Nhân Cần");
+            System.out.println("1:Nhập Tên Bệnh Nhân");
             System.out.println("2:Nhập Tên Bệnh Nhân Cần Chỉnh CHuẩn Đoán Bệnh ");
             System.out.println("3:Nhập Tên Bệnh Nhân Cần Chỉnh Số Bảo Hiểm ");
             System.out.println("4:Nhập Tên Bệnh Nhân Cần Chỉnh Tên Khoa ");
-            System.out.println("5:exit ");
+            System.out.println("5: Thoát ");
             try {
                 num = Integer.parseInt(sc.nextLine());
                 String edit;
@@ -182,7 +183,7 @@ public class Management implements InterfacePatient {
                                 System.out.println("Chỉnh tên : ");
                                 String add = sc.nextLine();
                                 name.setFullName(add);
-                                System.out.println("Name after editing " + name.getFullName());
+                                System.out.println("Tên sau khi chỉnh sửa " + name.getFullName());
                                 n++;
                                 break;
                             }
@@ -201,7 +202,7 @@ public class Management implements InterfacePatient {
                                 System.out.println("Chuẩn Đoán Lại : ");
                                 String add = sc.nextLine();
                                 Diagnosis.setDiagnosis(add);
-                                System.out.println("Name after editing " + Diagnosis.getDiagnosis());
+                                System.out.println("Tên sau khi chỉnh sửa " + Diagnosis.getDiagnosis());
                                 n++;
                                 break;
                             }
@@ -260,12 +261,11 @@ public class Management implements InterfacePatient {
         Scanner sc = new Scanner(System.in);
         int n = 0;
         do {
-            System.out.println("1: Delete");
-            System.out.println("2: exit");
+            System.out.println("1: Xóa");
+            System.out.println("2: Thoát");
             try {
                 n = Integer.parseInt(sc.nextLine());
-                switch (n) {
-                    case 1:
+                if (n == 1) {
                     System.out.println("Nhập mã bệnh nhân ");
                     String id = sc.nextLine();
                     Patient patient = null;
@@ -279,8 +279,9 @@ public class Management implements InterfacePatient {
                     if (patient != null) {
                         System.out.println("Bệnh Nhân Đã Xóa Tên Là : \n" + patient.getFullName());
                         mt.getPatientList().remove(patient);
+                    } else {
+                        System.out.println("Không Có Mã Bệnh Nhân Trong Danh Sách");
                     }
-                    break;
                 }
             } catch (Exception e) {
                 System.out.println("Nhập sai rồi");

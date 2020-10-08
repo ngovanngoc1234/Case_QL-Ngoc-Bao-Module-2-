@@ -95,9 +95,36 @@ public class Inpatient extends Patient {
                 System.out.println("Vui Lòng NHập Đúng Định Dạng");
             }
         } while (!check2);
-        System.out.println("Tên Khoa : ");
-        setFacultyName(sc.nextLine());
-        System.out.println("Số Gường Nằm : ");
-        setNumberOfBeds(sc.nextInt());
+
+        boolean check4 = false;
+        do {
+            System.out.println("Tên Khoa : ");
+            String regexHospitalizedDay = "^[a-zA-Z]$";
+            String nextLine = sc.nextLine();
+            Pattern patternFacultyName = Pattern.compile(regexHospitalizedDay);
+            Matcher matcherFacultyName = patternFacultyName.matcher(nextLine);
+            if (matcherFacultyName.find()) {
+                check4 = true;
+                setFacultyName(sc.nextLine());
+            } else {
+                System.out.println("Vui Lòng Nhập vào");
+            }
+        } while (!check4);
+
+        boolean check5 = false;
+        do {
+            System.out.println("Số Gường Nằm : ");
+            System.out.println("  star 00 =>");
+            String regexHospitalizedDay = "^\\d{2}$";
+            String nextLine = sc.nextLine();
+            Pattern patternNumberOfBeds = Pattern.compile(regexHospitalizedDay);
+            Matcher matcherNumberOfBeds = patternNumberOfBeds.matcher(nextLine);
+            if (matcherNumberOfBeds.find()) {
+                check5 = true;
+                setNumberOfBeds(sc.nextInt());
+            } else {
+                System.out.println("Vui Lòng Nhập vào");
+            }
+        } while (!check5);
     }
 }

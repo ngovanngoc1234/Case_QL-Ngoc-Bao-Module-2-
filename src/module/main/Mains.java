@@ -14,7 +14,6 @@ public class Mains implements Serializable {
         ManagementUser managementUser = new ManagementUser();
         Management management = new Management();
         int cases = 0;
-
         do {
             System.out.println("1: Đăng Nhập ");
             System.out.println("2: Đăng Ký ");
@@ -25,10 +24,9 @@ public class Mains implements Serializable {
                 cases = Integer.parseInt(sc.nextLine());
                 switch (cases) {
                     case 1:
-                        String search;
                         User user = managementUser.checkUser();
                         if (user.getRole() == 0) {
-                            System.out.println("----Logged in successfully----");
+                            System.out.println("----Đăng nhập thành công----");
                             int n = 0;
                             do {
                                 System.out.println("----Lựa Chọn Chức Năng----");
@@ -39,12 +37,9 @@ public class Mains implements Serializable {
                                     n = Integer.parseInt(sc.nextLine());
                                     switch (n) {
                                         case 1:
-                                            System.out.println("Nhập Thông Tin Cần Tìm :");
-                                            search = sc.nextLine();
-                                            management.search(search);
+                                            management.search();
                                             break;
                                         case 2:
-                                            System.out.println("Thông Tin Bệnh Nhân :");
                                             management.show();
                                             break;
                                     }
@@ -53,8 +48,8 @@ public class Mains implements Serializable {
                                 }
                             } while (n != 3);
                         } else if (user.getRole() == 1) {
-                            System.out.println("----Logged in successfully----");
-                            int n = 7;
+                            System.out.println("----Đăng nhập thành công----");
+                            int n = 0;
                             do {
                                 System.out.println("  Lựa Chọn Chức Năng :");
                                 System.out.println("1: Thêm Bệnh Nhân : ");
@@ -70,19 +65,15 @@ public class Mains implements Serializable {
                                             management.addInfos();
                                             break;
                                         case 2:
-                                            System.out.println("Nhập Tên Cần Tìm ");
-                                            search = sc.nextLine();
-                                            management.search(search);
+                                            management.search();
                                             break;
                                         case 3:
                                             management.edit();
                                             break;
                                         case 4:
-                                            System.out.println("Nhập Mã Bệnh Nhân Cần xóa :");
                                             management.delete();
                                             break;
                                         case 5:
-                                            System.out.println("Thông Tin Bệnh Nhân :");
                                             management.show();
                                             break;
                                     }
@@ -94,6 +85,7 @@ public class Mains implements Serializable {
                         break;
                     case 2:
                         managementUser.addInfos();
+                        break;
                 }
             } catch (Exception e) {
                 System.out.println("Nhập Lại Đê Bạn Ê ");

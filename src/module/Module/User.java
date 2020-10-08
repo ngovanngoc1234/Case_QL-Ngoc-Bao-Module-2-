@@ -1,10 +1,11 @@
 package module.Module;
 
+import java.io.Serializable;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class User {
+public class User implements Serializable {
     private String password;
     private String youName;
     public static final int ADMIN_ROLE = 1;

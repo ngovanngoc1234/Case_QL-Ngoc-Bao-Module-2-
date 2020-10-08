@@ -8,26 +8,32 @@ public class TransferPatient extends Patient {
     private String deliveryDate;
     private String placeOfTransfer;
 
-    public TransferPatient() {}
+    public TransferPatient() {
+    }
+
     public TransferPatient(String profileCode, String fullName, String dateOfBirth, String diagnosis) {
         super(profileCode, fullName, dateOfBirth, diagnosis);
     }
+
     public String getDeliveryDate() {
         return deliveryDate;
     }
+
     public void setDeliveryDate(String deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
+
     public String getPlaceOfTransfer() {
         return placeOfTransfer;
     }
+
     public void setPlaceOfTransfer(String placeOfTransfer) {
         this.placeOfTransfer = placeOfTransfer;
     }
 
     @Override
     public String toString() {
-        return "Thông Tin Bệnh Nhân Chuyển Viện : " +"\n"+
+        return "Thông Tin Bệnh Nhân Chuyển Viện : " + "\n" +
                 " Mã hồ sơ : " + super.getProfileCode() + '\'' +
                 ", Họ Tên : " + super.getFullName() + '\'' +
                 ", Ngày Tháng Năm Sinh : " + super.getDateOfBirth() + '\'' +
@@ -50,13 +56,25 @@ public class TransferPatient extends Patient {
             Matcher matcherDateOfBirth = patternDateOfBirth.matcher(inputDeliveryDate);
             if (matcherDateOfBirth.find()) {
                 check4 = true;
-                setDeliveryDate(inputDeliveryDate) ;
+                setDeliveryDate(inputDeliveryDate);
             } else {
                 System.out.println("Vui Lòng NHập Đúng Định Dạng");
             }
-        }while (!check4);
+        } while (!check4);
 
-        System.out.println("Nơi Chuyển Đến : ");
-        setPlaceOfTransfer(sc.nextLine());
+        boolean check5 = false;
+        do {
+            System.out.println("Nơi Chuyển Đến : ");
+            String regexPlaceOfTransfer = "^[a-zA-Z]";
+            String inputDeliveryDate = sc.nextLine();
+            Pattern patternPlaceOfTransfer = Pattern.compile(regexPlaceOfTransfer);
+            Matcher matcherPlaceOfTransfer = patternPlaceOfTransfer.matcher(inputDeliveryDate);
+            if (matcherPlaceOfTransfer.find()) {
+                check5 = true;
+                setPlaceOfTransfer(sc.nextLine());
+            } else {
+                System.out.println("Vui Lòng NHập vào");
+            }
+        } while (!check5);
     }
 }
