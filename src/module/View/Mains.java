@@ -1,8 +1,8 @@
-package module.main;
+package module.View;
 
-import module.Module.User;
-import module.managemenboss.Management;
-import module.managemenboss.ManagementUser;
+import module.Model.User;
+import module.Controller.Management;
+import module.Controller.ManagementUser;
 
 import java.io.*;
 import java.util.Scanner;
@@ -26,7 +26,6 @@ public class Mains implements Serializable {
                     case 1:
                         User user = managementUser.checkUser();
                         if (user.getRole() == 0) {
-                            System.out.println("----Đăng nhập thành công----");
                             int n = 0;
                             do {
                                 System.out.println("----Lựa Chọn Chức Năng----");
@@ -47,8 +46,8 @@ public class Mains implements Serializable {
                                     System.out.println("Chọn lại số đi ");
                                 }
                             } while (n != 3);
+                            break;
                         } else if (user.getRole() == 1) {
-                            System.out.println("----Đăng nhập thành công----");
                             int n = 0;
                             do {
                                 System.out.println("  Lựa Chọn Chức Năng :");

@@ -1,4 +1,5 @@
-package module.Module;
+package module.Model;
+
 import java.util.*;
 
 public class ListPatient {

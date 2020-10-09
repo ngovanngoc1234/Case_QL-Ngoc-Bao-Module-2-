@@ -1,5 +1,4 @@
-package module.Module;
-import module.Module.User;
+package module.Model;
 
 import java.util.List;
 

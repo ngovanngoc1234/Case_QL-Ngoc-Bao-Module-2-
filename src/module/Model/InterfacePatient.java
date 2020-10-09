@@ -1,5 +1,4 @@
-package module.interfaceboss;
-import module.Module.Patient;
+package module.Model;
 import java.io.IOException;
 import java.util.List;
 

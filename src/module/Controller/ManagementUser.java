@@ -1,8 +1,8 @@
-package module.managemenboss;
+package module.Controller;
 
-import module.Module.ListUsers;
-import module.interfaceboss.InterfaceUser;
-import module.Module.User;
+import module.Model.ListUsers;
+import module.Model.InterfaceUser;
+import module.Model.User;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class ManagementUser implements InterfaceUser {
 
 
     public User checkUser() throws IOException, ClassNotFoundException {
-        User user = new User();
+        User user = null;
         User user1 = new User("admin", "ngoc", User.ADMIN_ROLE);
         User users = new User("user", "ngovanngoc", User.USER_ROLE);
         methodUsers.getUserList().add(user1);
@@ -51,34 +51,27 @@ public class ManagementUser implements InterfaceUser {
                 if (n == 1) {
                     System.out.println("Tên tài khoản");
                     String name = sc.nextLine();
-                    System.out.println(" Mật khẩu");
+                    System.out.println("Mật khẩu");
                     String passWord = sc.nextLine();
-                    int index = 0;
                     for (User user5 : methodUsers.getUserList()) {
                         if (name.equals(user5.getYouName()) && passWord.equals(user5.getPassword())) {
-                            user = user5;
-                            index++;
                             System.out.println("Đăng Nhập Thành Công");
-                            break;
+                            return user = user5;
                         }
                     }
-                    if (index <= 0) {
-                        System.out.println("Sai tài khoản hoặc mật khẩu");
-                        user = null;
-                    }
+                    System.out.println("Sai tài khoản hoặc mật khẩu");
                 }
             } catch (Exception e) {
                 System.out.println("Nhập vào đê ");
             }
         } while (n != 2);
-        return user;
+        return null;
     }
 
 
     @Override
     public void addInfos() throws IOException, ClassNotFoundException {
         //doc file gan vao bien list user
-
         int number = 0;
         do {
             System.out.println("1: Thêm tài khoản mới");
@@ -106,7 +99,6 @@ public class ManagementUser implements InterfaceUser {
             }
         } while (number != 2);
         //ghi vao file
-
     }
 
 

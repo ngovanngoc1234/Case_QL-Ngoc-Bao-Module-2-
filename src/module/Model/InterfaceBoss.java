@@ -1,4 +1,4 @@
-package module.interfaceboss;
+package module.Model;
 import java.io.IOException;
 
 public interface InterfaceBoss {

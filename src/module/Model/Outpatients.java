@@ -1,4 +1,4 @@
-package module.Module;
+package module.Model;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -51,7 +51,7 @@ public class Outpatients extends Patient {
         do {
             System.out.println("Nhập Số Thẻ Bảo Hiểm : ");
             System.out.println("  BH....");
-            String regex = "^BH+\\d+]$";
+            String regex = "^BH+\\d+$";
             String nextLine = sc.nextLine();
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(nextLine);
@@ -67,7 +67,7 @@ public class Outpatients extends Patient {
         do {
             System.out.println("Mã Đơn Thuốc : ");
             System.out.println("  BV....");
-            String regex = "^BV+\\d+]$";
+            String regex = "^BV+\\d+$";
             String nextLine = sc.nextLine();
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(nextLine);

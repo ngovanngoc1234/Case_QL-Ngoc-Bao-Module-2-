@@ -1,5 +1,5 @@
-package module.managemenboss;
-import module.Module.Patient;
+package module.Controller;
+import module.Model.Patient;
 
 import java.util.Comparator;
 

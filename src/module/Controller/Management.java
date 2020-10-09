@@ -1,6 +1,7 @@
-package module.managemenboss;
-import module.Module.*;
-import module.interfaceboss.InterfacePatient;
+package module.Controller;
+import module.Model.*;
+import module.Model.InterfacePatient;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package module.Module;
+package module.Model;
 
 import java.io.Serializable;
 import java.util.Scanner;
