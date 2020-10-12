@@ -60,13 +60,14 @@ public class Patient implements Serializable {
                 ", Chuẩn Đoán : " + diagnosis + '\'';
     }
 
+    
     public void addInfo() {
         Scanner sc = new Scanner(System.in);
 
         boolean check2 = false;
         do {
             System.out.println("Nhập Mã Hồ Sơ  :");
-            String regexName = "^?$";
+            String regexName = "^BN+\\$";
             String line = sc.nextLine();
             Pattern pattern = Pattern.compile(regexName);
             Matcher matcher = pattern.matcher(line);
@@ -81,7 +82,7 @@ public class Patient implements Serializable {
         boolean check = false;
         do {
             System.out.println("Nhập Họ Và Tên :");
-            String regexName = "^?$";
+            String regexName = "^[a-zA-Z]\\s+?";
             String line = sc.nextLine();
             Pattern patternName = Pattern.compile(regexName);
             Matcher matcherName = patternName.matcher(line);
@@ -111,7 +112,7 @@ public class Patient implements Serializable {
         boolean check3 = false;
         do {
             System.out.println("Chuẩn Đoán Bệnh : ");
-            String regex = "^?$";
+            String regex = "^[a-zA-Z]+?$";
             String line = sc.nextLine();
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(line);
