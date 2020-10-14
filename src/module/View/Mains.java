@@ -1,8 +1,8 @@
 package module.View;
 
 import module.Model.User;
-import module.Controller.Management;
-import module.Controller.ManagementUser;
+import module.business.ManagementPatient;
+import module.business.ManagementUser;
 
 import java.io.*;
 import java.util.Scanner;
@@ -12,7 +12,7 @@ public class Mains implements Serializable {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ManagementUser managementUser = new ManagementUser();
-        Management management = new Management();
+        ManagementPatient management = new ManagementPatient();
         int cases = 0;
         do {
             System.out.println("1: Đăng Nhập ");
@@ -21,6 +21,7 @@ public class Mains implements Serializable {
             try {
                 management.readFile();
                 management.writeToFile();
+                managementUser.writeToFile();
                 cases = Integer.parseInt(sc.nextLine());
                 switch (cases) {
                     case 1:

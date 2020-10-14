@@ -34,7 +34,7 @@ public class Outpatients extends Patient {
 
     @Override
     public String toString() {
-        return "Thông Tinh Bệnh Nhân Ngoại Trú : " + '\'' +"\n"+
+        return "Thông Tinh Bệnh Nhân Ngoại Trú : " + '\'' + "\n" +
                 " Mã hồ sơ : " + super.getProfileCode() + '\'' +
                 ", Họ Tên : " + super.getFullName() + '\'' +
                 ", Ngày Tháng Năm Sinh : " + super.getDateOfBirth() + '\'' +
@@ -47,36 +47,9 @@ public class Outpatients extends Patient {
     public void addInfo() {
         super.addInfo();
         Scanner sc = new Scanner(System.in);
-        boolean check = false;
-        do {
-            System.out.println("Nhập Số Thẻ Bảo Hiểm : ");
-            System.out.println("  BH....");
-            String regex = "^BH+\\d+$";
-            String nextLine = sc.nextLine();
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(nextLine);
-            if (matcher.find()) {
-                check = true;
-                setInsuranceBook(sc.nextLine()) ;
-            } else {
-                System.out.println("Vui Lòng Nhập vào");
-            }
-        } while (!check);
-
-        boolean check1 = false;
-        do {
-            System.out.println("Mã Đơn Thuốc : ");
-            System.out.println("  BV....");
-            String regex = "^BV+\\d+$";
-            String nextLine = sc.nextLine();
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(nextLine);
-            if (matcher.find()) {
-                check1 = true;
-                setPrescriptionCode(sc.nextLine());
-            } else {
-                System.out.println("Vui Lòng Nhập vào");
-            }
-        } while (!check1);
+        System.out.println("Nhập Số Thẻ Bảo Hiểm : ");
+        setInsuranceBook(sc.nextLine());
+        System.out.println("Mã Đơn Thuốc : ");
+        setPrescriptionCode(sc.nextLine());
     }
 }

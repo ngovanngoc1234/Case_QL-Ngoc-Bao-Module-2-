@@ -1,4 +1,4 @@
-package module.Controller;
+package module.business;
 import module.Model.Patient;
 
 import java.util.Comparator;

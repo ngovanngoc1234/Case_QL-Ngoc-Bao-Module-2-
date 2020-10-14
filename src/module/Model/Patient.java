@@ -43,7 +43,8 @@ public class Patient implements Serializable {
         this.diagnosis = diagnosis;
     }
 
-    public Patient() {}
+    public Patient() {
+    }
 
     public Patient(String profileCode, String fullName, String dateOfBirth, String diagnosis) {
         this.profileCode = profileCode;
@@ -60,29 +61,17 @@ public class Patient implements Serializable {
                 ", Chuẩn Đoán : " + diagnosis + '\'';
     }
 
-    
+
     public void addInfo() {
         Scanner sc = new Scanner(System.in);
 
-        boolean check2 = false;
-        do {
-            System.out.println("Nhập Mã Hồ Sơ  :");
-            String regexName = "^BN+\\$";
-            String line = sc.nextLine();
-            Pattern pattern = Pattern.compile(regexName);
-            Matcher matcher = pattern.matcher(line);
-            if (matcher.find()) {
-                check2 = true;
-                setProfileCode(sc.nextLine());
-            } else {
-                System.out.println("Vui Lòng Không Để Trống");
-            }
-        } while (!check2);
+        System.out.println("Nhập Mã Hồ Sơ  :");
+        setProfileCode(sc.nextLine());
 
         boolean check = false;
         do {
             System.out.println("Nhập Họ Và Tên :");
-            String regexName = "^[a-zA-Z]\\s+?";
+            String regexName = "^[a-zA-Z]+\\s+?";
             String line = sc.nextLine();
             Pattern patternName = Pattern.compile(regexName);
             Matcher matcherName = patternName.matcher(line);
@@ -108,21 +97,9 @@ public class Patient implements Serializable {
                 System.out.println("Vui Lòng NHập Đúng Định Dạng");
             }
         } while (!check1);
+        System.out.println("Chuẩn Đoán Bệnh : ");
+        setDiagnosis(sc.nextLine());
 
-        boolean check3 = false;
-        do {
-            System.out.println("Chuẩn Đoán Bệnh : ");
-            String regex = "^[a-zA-Z]+?$";
-            String line = sc.nextLine();
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(line);
-            if (matcher.find()) {
-                check3 = true;
-                setDiagnosis(sc.nextLine());
-            } else {
-                System.out.println("Vui Lòng Không Để Trống");
-            }
-        } while (!check3);
 
     }
 }

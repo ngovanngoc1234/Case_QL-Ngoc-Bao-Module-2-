@@ -1,7 +1,7 @@
-package module.Model;
+package module.display;
 import java.io.IOException;
 
-public interface InterfaceBoss {
+public interface DisplayCalculate {
     void addInfos() throws IOException, ClassNotFoundException;
     void show() throws IOException, ClassNotFoundException;
     void search();

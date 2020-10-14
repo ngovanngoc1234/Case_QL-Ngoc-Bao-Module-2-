@@ -1,6 +1,6 @@
-package module.Controller;
+package module.business;
 import module.Model.*;
-import module.Model.InterfacePatient;
+import module.display.DisplayPatient;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 
 
-public class Management implements InterfacePatient {
+public class ManagementPatient implements DisplayPatient {
     List<Patient> patients = new ArrayList<>();
     ListPatient mt = new ListPatient(patients);
 
